@@ -1,31 +1,51 @@
 # MCPE Structure Extractor
 
-An offline-first Android application for extracting **previously saved Minecraft Bedrock structure templates** from `.mcworld` archives.
+An offline-first Android app for extracting **previously saved Minecraft Bedrock structure templates** from `.mcworld` archives.
 
-## Scope
+## Current scope
 
-This project extracts existing LevelDB records whose keys begin with `structuretemplate_`. It does not detect buildings in ordinary terrain or decode chunk regions.
+This app reads a Bedrock LevelDB database and extracts records whose keys begin with `structuretemplate_`. It recovers structures previously saved using a Structure Block or `/structure save`. It does not scan ordinary terrain or detect arbitrary buildings.
 
-## Planned workflow
+## Android app
 
-1. Select a `.mcworld` archive with Android's Storage Access Framework.
-2. Inspect the ZIP archive and locate the Bedrock `db/` directory.
-3. Read the Bedrock LevelDB database using a reader compatible with Mojang's LevelDB variant.
-4. Enumerate `structuretemplate_` records across namespaces.
-5. Preserve each record's original value bytes and export `.mcstructure` files.
-6. Validate output and optionally package all structures into a ZIP.
+- Kotlin Android host with a local WebView interface.
+- Android Storage Access Framework file picker and save dialog.
+- Bundled JavaScript LevelDB reader; extraction works offline after installation.
+- Finds structures across namespaces, including `mystructure:`.
+- Exports one selected structure as `.mcstructure` or multiple selected structures as a ZIP.
+- ZIP exports include an `extraction_manifest.json` with original identifiers.
+- No internet permission, accounts, telemetry, or world uploads.
 
-## Technical direction
+## Build
 
-- Kotlin + Jetpack Compose Android shell.
-- Android Storage Access Framework for file access.
-- A browser-compatible Bedrock LevelDB reader is being evaluated for a bundled, local WebView engine. This avoids assuming that an ordinary desktop LevelDB JNI binary can read Bedrock databases on Android.
-- No world data is uploaded to a server.
+Requirements: JDK 17, Android SDK (compile SDK 35), Node.js 20+ and npm, Gradle 8.9.
 
-## Important compatibility notes
+```bash
+npm install
+npm test
+npm run build:engine
+gradle :app:assembleDebug
+```
 
-Bedrock uses a modified LevelDB implementation with zlib support. The reader must open the **database directory**, not an individual `.ldb` file. `.mcstructure` payloads must be copied byte-for-byte; parsing is for validation and metadata only, not for rewriting the structure.
+Debug APK: `app/build/outputs/apk/debug/app-debug.apk`.
 
-## Status
+GitHub Actions runs the JavaScript tests, bundles the offline reader, builds the APK, and uploads the APK as a workflow artifact.
 
-Initial Android project scaffold. Extraction is not yet advertised as working until the bundled reader is integrated and tested against real Bedrock worlds containing saved structures.
+## Technical implementation
+
+- The app bundles `mcbe-leveldb-reader` 5.0.1, which uses a browser-compatible implementation based on Mojang's Minecraft Creator Tools LevelDB reader.
+- The engine calls `extractStructureFilesFromMcworld(file, false)` to keep namespaced identifiers.
+- Original structure payloads are copied to export without parsing and rewriting NBT.
+- ZIP paths are sanitized and duplicate output paths receive a suffix.
+- Android's native bridge writes exports in chunks and asks the user where to save them through the Storage Access Framework.
+
+## Limitations and validation status
+
+- Only saved structure templates are supported. Normal buildings in chunks are outside this app's scope.
+- The app does not currently preview structures or rewrite/convert NBT.
+- Large world archives can require substantial memory because the upstream reader materializes LevelDB files while parsing. Test with representative world sizes on the target phone.
+- The repository's initial implementation is not yet verified against a real user-supplied Bedrock world. Do not treat a successful scan as proof that every exported file loads in Minecraft until that compatibility test is completed.
+
+## Third-party code
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for bundled dependency licenses and attribution.
