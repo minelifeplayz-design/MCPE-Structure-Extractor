@@ -42,7 +42,7 @@ class MainActivity : Activity() {
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true
         webView.settings.allowFileAccess = false
-        webView.settings.allowContentAccess = false
+        webView.settings.allowContentAccess = true
         webView.settings.setSupportZoom(false)
         webView.settings.javaScriptCanOpenWindowsAutomatically = false
 
@@ -54,7 +54,18 @@ class MainActivity : Activity() {
             override fun shouldInterceptRequest(
                 view: WebView,
                 request: WebResourceRequest
-            ) = assetLoader.shouldInterceptRequest(request.url)
+            ) = if (request.url.host == "appassets.androidplatform.net") {
+                assetLoader.shouldInterceptRequest(request.url)
+            } else {
+                android.webkit.WebResourceResponse("text/plain", "utf-8", 403, "Blocked", emptyMap(), null)
+            }
+
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                request: WebResourceRequest
+            ): Boolean {
+                return request.url.host != "appassets.androidplatform.net"
+            }
         }
 
         webView.webChromeClient = object : WebChromeClient() {
