@@ -1,8 +1,9 @@
-const INVALID_SEGMENT = /[\\/:*?"<>|]/g;
+const INVALID_SEGMENT = /[:*?"<>|]/g;
 const CONTROL_CHARS = /[\x00-\x1f]/g;
 
 export function safeSegment(input) {
   let value = String(input ?? "").normalize("NFC");
+  value = value.replaceAll("\\", "_").replaceAll("/", "_");
   value = value.replace(INVALID_SEGMENT, "_").replace(CONTROL_CHARS, "_").trim();
   if (!value || value === "." || value === "..") value = "unnamed";
   return Array.from(value).slice(0, 100).join("");
