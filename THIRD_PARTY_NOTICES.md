@@ -1,14 +1,70 @@
 # Third-party notices
 
-## mcbe-leveldb-reader
-- Package: mcbe-leveldb-reader 5.0.1
-- Source: https://github.com/HoloPrint-MC/MCBE-LevelDB-reader
-- License: MIT
-- Copyright: Copyright (c) 2025 SuperLlama88888
+The application bundles the following third-party components. Their licenses remain applicable to those components.
 
-This application bundles mcbe-leveldb-reader and its runtime dependencies. The upstream reader is based on LevelDB-reading code from Mojang's Minecraft Creator Tools.
+## mcbe-leveldb-reader 5.0.1
 
-## fflate
-- Package: fflate 0.8.2
-- Source: https://github.com/101arrowz/fflate
-- License: MIT
+Source: https://github.com/HoloPrint-MC/MCBE-LevelDB-reader  
+License: MIT  
+Copyright (c) 2025 SuperLlama88888
+
+This browser-compatible Bedrock LevelDB reader is based on LevelDB-reading code from Mojang's Minecraft Creator Tools.
+
+```text
+MIT License
+
+Copyright (c) 2025 SuperLlama88888
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+## fflate 0.8.2
+
+Source: https://github.com/101arrowz/fflate  
+License: MIT  
+Copyright (c) 2026 Arjun Barrett
+
+```text
+MIT License
+
+Copyright (c) 2026 Arjun Barrett
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+## AndroidX WebKit 1.12.1
+
+Source: https://developer.android.com/jetpack/androidx/releases/webkit  
+License: Apache License 2.0
