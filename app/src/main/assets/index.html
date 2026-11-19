@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101712">
+  <title>MCPE Structure Extractor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48"><path d="M24 3 43 13.5v21L24 45 5 34.5v-21L24 3Z" fill="#72D69A"/><path d="m24 9 13 7.2v15.6L24 39l-13-7.2V16.2L24 9Z" fill="#244C35"/><path d="m24 14 8.5 4.7v10.6L24 34l-8.5-4.7V18.7L24 14Z" fill="#B7F1C9"/></svg>
+      </div>
+      <div class="brand-copy">
+        <div class="brand-title">Structure Extractor</div>
+        <div class="brand-subtitle">Minecraft Bedrock Edition</div>
+      </div>
+      <span class="offline-pill"><span></span> OFFLINE</span>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">BEDROCK WORLD TOOL</p>
+      <h1>Recover your<br><span>saved structures.</span></h1>
+      <p class="intro-copy">Extract structure templates stored inside a Minecraft world backup. Your world stays on this device.</p>
+    </section>
+
+    <section class="import-card">
+      <div class="card-icon">▧</div>
+      <div class="import-copy">
+        <h2>Import a world</h2>
+        <p id="file-label">Choose a .mcworld backup to scan</p>
+      </div>
+      <button id="choose-button" class="button button-primary">Choose file</button>
+      <input id="world-input" type="file" accept=".mcworld,application/octet-stream" hidden>
+    </section>
+
+    <section id="scan-status" class="status-panel" aria-live="polite">
+      <div class="status-indicator"></div>
+      <div><strong id="status-title">Ready to scan</strong><p id="status-message">Select a world file to begin.</p></div>
+    </section>
+
+    <section id="results-section" class="results-section" hidden>
+      <div class="section-heading">
+        <div><p class="eyebrow">DATABASE RESULTS</p><h2>Saved structures <span id="result-count" class="count">0</span></h2></div>
+      </div>
+      <div class="toolbar">
+        <input id="search-input" class="search" type="search" placeholder="Search structure names…" autocomplete="off">
+        <button id="select-all" class="button button-quiet">Select all</button>
+      </div>
+      <div id="structure-list" class="structure-list"></div>
+      <div class="export-bar">
+        <div><strong id="selected-count">0 selected</strong><p>Original structure data is preserved.</p></div>
+        <button id="export-button" class="button button-primary" disabled>Export selected</button>
+      </div>
+    </section>
+
+    <section id="empty-state" class="empty-state" hidden>
+      <div class="empty-icon">⌕</div>
+      <h2>No saved structures found</h2>
+      <p>This world database did not contain any keys beginning with <code>structuretemplate_</code>. Ordinary buildings are not saved structure templates.</p>
+    </section>
+
+    <footer>
+      <p>LOCAL PROCESSING · NO WORLD UPLOADS</p>
+      <p>Only structures saved with a Structure Block or <code>/structure save</code> can be recovered.</p>
+      <p class="version">MCPE Structure Extractor · 0.1.0</p>
+    </footer>
+  </main>
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
